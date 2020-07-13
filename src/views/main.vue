@@ -56,6 +56,10 @@
       userName: {
         get () { return this.$store.state.user.name },
         set (val) { this.$store.commit('user/updateName', val) }
+      },
+      realname: {
+        get () { return this.$store.state.user.realname },
+        set (val) { this.$store.commit('user/updateRealname', val) }
       }
     },
     created () {
@@ -75,14 +79,15 @@
       // 获取当前管理员信息
       getUserInfo () {
         this.$http({
-          url: this.$http.adornUrl('/sys/user/info'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 0) {
+      url: this.$http.adornUrl('/sys/user/info'),
+      method: 'get',
+      params: this.$http.adornParams()
+    }).then(({data}) => {
+    if (data && data.code === 0) {
             this.loading = false
             this.userId = data.user.userId
             this.userName = data.user.username
+            this.realname = data.user.realname
           }
         })
       }

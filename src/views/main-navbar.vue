@@ -81,7 +81,7 @@
         set (val) { this.$store.commit('common/updateMainTabs', val) }
       },
       userName: {
-        get () { return this.$store.state.user.name }
+        get () { return this.$store.state.user.realname }
       }
     },
     methods: {
