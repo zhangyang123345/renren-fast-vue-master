@@ -41,7 +41,7 @@
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
-              <img src="~@/assets/img/dongtai.gif" :alt="userName">{{ userName }}
+              <img src="~@/assets/img/dongtai.gif" :alt="userName">{{noontip}}！{{ userName }}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
@@ -62,6 +62,7 @@
   export default {
     data () {
       return {
+        noontip: '', // 上下午提示
         updatePassowrdVisible: false
       }
     },
@@ -84,7 +85,22 @@
         get () { return this.$store.state.user.realname }
       }
     },
+    created () {
+      this.mynoontip()
+    },
     methods: {
+      // 获取当前时间
+      mynoontip() {
+        const that = this
+        const date = new Date()
+        if (date.getHours() >= 0 && date.getHours() < 12) {
+          that.noontip = '上午好'
+        } else if (date.getHours() >= 12 && date.getHours() < 18) {
+          that.noontip = '下午好'
+        } else {
+          that.noontip = '晚上好'
+        }
+      },
       // 修改密码
       updatePasswordHandle () {
         this.updatePassowrdVisible = true
