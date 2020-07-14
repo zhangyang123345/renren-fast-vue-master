@@ -5,8 +5,8 @@
   window.SITE_CONFIG = {};
 
   // api接口请求地址
-  // window.SITE_CONFIG['baseUrl'] = 'http://DESKTOP-YONGLI:8082/renren-fast';
-  window.SITE_CONFIG['baseUrl'] = 'http://DESKTO-95RUTUB:8082/renren-fast';
+  window.SITE_CONFIG['baseUrl'] = 'http://DESKTOP-YONGLI:8082/renren-fast';
+  // window.SITE_CONFIG['baseUrl'] = 'http://DESKTO-95RUTUB:8082/renren-fast';
   //  window.SITE_CONFIG['baseUrl'] = 'http://localhost:8083/renren-fast'
   // window.SITE_CONFIG['baseUrl'] = 'http://3q2189y798.qicp.vip:32411/renren-fast';
   // window.SITE_CONFIG['baseUrl'] = 'http://pvdop2dcm:8082/renren-fast';

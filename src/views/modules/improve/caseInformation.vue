@@ -56,6 +56,7 @@
         <!--<el-button  type="primary" @click="addOrUpdateHandle()">新增</el-button>-->
         <!--<el-button  type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
           <el-upload
+            v-if="isAuth('project:import')"
             :show-file-list="false"
             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
             action="#"
@@ -245,7 +246,7 @@
       this.getDataList()
     },
     created () {
-      // this.getDataJB()
+       this.getDataJB()
     },
     methods: {
       // 获取基本参数
@@ -254,7 +255,7 @@
         this.$http({
           url: this.$http.adornUrl('/project/getProcess'),
           method: 'get',
-          data: this.$http.adornData(this.dataList, right)
+          data: this.$http.adornData(this.dataList, false)
         }).then(({data}) => {
           if (data && data.code === 0) {
           this.processImproves = data.list
