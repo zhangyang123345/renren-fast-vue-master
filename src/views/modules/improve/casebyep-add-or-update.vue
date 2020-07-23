@@ -2,7 +2,8 @@
   <el-dialog
     :title="'详情(' + dataForm.jobNo + ')'"
     :close-on-click-modal="false"
-    :visible.sync="visible">
+    :visible.sync="visible"
+    style="width: 120%;">
     <el-table
       :data="dataList"
       border
@@ -13,22 +14,26 @@
         prop="projectId"
         header-align="center"
         align="center"
+        width="80px"
         label="案件Id">
       </el-table-column>
       <el-table-column
         prop="submitDate"
         header-align="center"
+        width="100px"
         align="center"
         label="提交时间">
       </el-table-column>
       <el-table-column
         prop="state"
+        width="120px"
         header-align="center"
         align="center"
         label="状态">
       </el-table-column>
       <el-table-column
         prop="lscDate"
+        width="110px"
         header-align="center"
         align="center"
         label="最后修改时间">
@@ -42,24 +47,28 @@
       <el-table-column
         prop="projectType"
         header-align="center"
+        width="100px"
         align="center"
         label="类型">
       </el-table-column>
       <el-table-column
         prop="processImprove"
         header-align="center"
+        width="140px"
         align="center"
         label="厂别">
       </el-table-column>
       <el-table-column
         prop="customerField"
         header-align="center"
+        width="100px"
         align="center"
         label="产品阶段">
       </el-table-column>
       <el-table-column
         prop="teamLeader"
         header-align="center"
+        width="100px"
         align="center"
         label="项目领导者">
       </el-table-column>
@@ -68,6 +77,9 @@
         header-align="center"
         align="center"
         label="项目队员">
+        <template slot-scope="scope">
+          <p style="line-height: 10px;" v-for="item in scope.row.teamMember.split(',') ">{{item}}</p>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination

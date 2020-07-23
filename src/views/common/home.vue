@@ -1,251 +1,49 @@
 <template>
-  <div >
-  <el-row :gutter="24" class="el-row" type="flex">
-    <div style="height: 40px;width: 100%;background-color:RGB(0,60,107)"></div>
-  </el-row>
-    <el-row :gutter="24" class="el-row" type="flex">
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('451692')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <p class="homePVD">PVD厂</p>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.xxsJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.xxsJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.xxsAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('243221')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-               <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/gxw.jpg">
-               <!--</span>-->
-              </el-row>
-            <el-row>
-            <p class="homeP">郭祥伟</p>
-              </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.gxwJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.gxwJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.gxwAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('915484')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/yp.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">岳平</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.ypJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.ypJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.ypAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('308586')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/wqj.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">王启军</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.wqjJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.wqjJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.wqjAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('943139')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/zy.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">周颖</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.zyJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.zyJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.zyAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('951976')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/dhj.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">邓海军</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.dhjJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.dhjJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.dhjAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-  </el-row>
-    <el-row :gutter="24" class="el-row" type="flex">
-      <el-col :span="12">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-        <div id="echart1" style="height: 35vh"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-          <div style="height: 35vh">
-            <span @click="export2Exce()" style="cursor:pointer;"><p class="ptitle">未考试人员名单(点击导出)</p></span>
-            <el-table
-              :data="dataList"
-              border
-              :row-style="tableRowStyle"
-              :header-cell-style="tableHeaderColor"
-              v-loading="dataListLoading"
-              style="width: 100%;">
-              <el-table-column
-                prop="jobNo"
-                header-align="center"
-                align="center"
-                label="工号">
-              </el-table-column>
-              <el-table-column
-                prop="name"
-                header-align="center"
-                align="center"
-                label="姓名">
-              </el-table-column>
-              <el-table-column
-                prop="director"
-                header-align="center"
-                align="center"
-                label="主管">
-              </el-table-column>
-            </el-table>
-            <el-pagination
-              @size-change="sizeChangeHandle"
-              @current-change="currentChangeHandle"
-              :current-page="pageIndex"
-              :page-sizes="[5]"
-              :page-size="pageSize"
-              :total="totalPage"
-              layout="total, sizes, prev, pager, next, jumper">
-            </el-pagination>
+    <div >
+      <el-row :gutter="24" class="el-row" type="flex">
+        <el-col span="6">
+          <el-row :gutter="24" class="el-row" type="flex">
+            <el-col span="24">
+              <div class="imageBox">
+                <img id='leftReview_2 ' style="height:280px" class="image" src="../../images/AIM_1.jpg"/>
+              </div>
+            </el-col>
+          </el-row>
+           <el-row :gutter="24" class="el-row" type="flex">
+             <el-col span="24">
+               <div class="imageBox">
+                  <img id='leftReview_1' style="margin-top:20px;height: 106%;" class="image" src="../../images/safe.jpg"/>
+               </div>
+             </el-col>
+           </el-row>
+        </el-col>
+        <el-col span="6">
+          <el-row :gutter="24" class="el-row" type="flex">
+            <el-col span="24">
+              <div class="imageBox">
+                <img id='centReview_2' style="height:280px" class="image" src="../../images/AIM_2.jpg"/>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24" class="el-row" type="flex">
+            <el-col span="24">
+              <div class="imageBox">
+                <img id='leftReview_3 ' style="margin-top:20px;height: 106%;" class="image" src="../../images/op_recommend.jpg"/>
+              </div>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col span="6">
+          <div class="imageBox">
+            <img id='rightReview_1' class="image" src="../../images/dbp_challenge.jpg"/>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-row :gutter="24" class="el-row" type="flex">
-      <el-col :span="24">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-          <div id="echart2" style="height: 30vh"></div>
-        </el-card>
-      </el-col>
-    </el-row>
+        </el-col>
+        <el-col span="6">
+          <div class="imageBox">
+            <img id='rightReview_2' class="image" src="../../images/jabil.jpg"/>
+          </div>
+        </el-col>
+      </el-row>
     </div>
 </template>
 
@@ -302,10 +100,8 @@
     components: {
     },
     activated () {
-      this.getDataList()
     },
     mounted () {
-      this.drawLine()
     },
     methods: {
       // 卡片点击事件
@@ -723,6 +519,14 @@
     /*background-color: rgba(239,241,244,1);*/
     /*height: 85vh;*/
     /*width: 100vw;*/
+  }
+  .image{
+    width:100%;
+    height: 100%;
+  }
+  .imageBox{
+    width:100%;
+    height: 100%;
   }
   .cardEl {
     transition: all .5s;

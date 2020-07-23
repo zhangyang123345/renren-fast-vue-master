@@ -71,6 +71,17 @@
                                                                              style="margin-right: 5px"></i>{{fileUploadBtnText1}}
           </el-button>
         </el-upload>
+        <el-upload
+          :show-file-list="false"
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+          action="#"
+          :on-success="fileUploadSuccess2"
+          :on-error="fileUploadError2" :disabled="fileUploadBtnText2=='正在导入'"
+          :before-upload="beforeFileUpload2" style="display: inline">
+          <el-button  type="success" :loading="fileUploadBtnText2=='正在导入'"><i class="fa fa-lg fa-level-up"
+                                                                              style="margin-right: 5px"></i>{{fileUploadBtnText2}}
+          </el-button>
+        </el-upload>
       </el-form-item>
     </el-form>
     <el-table
@@ -189,6 +200,7 @@
         <template scope="scope">
           <div v-if="scope.row.active==0">离职</div>
           <div v-if="scope.row.active==1">在职</div>
+          <div v-if="scope.row.active==3">异常</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -201,6 +213,8 @@
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.jobNo)">修改</el-button>
           <el-button v-if="scope.row.active == 1" type="text" size="small" @click="changeStata(scope.row.jobNo,0)">离职</el-button>
           <el-button v-if="scope.row.active == 0" type="text" size="small" @click="changeStata(scope.row.jobNo,1)">在职</el-button>
+          <el-button v-if="scope.row.active == 3" type="text" size="small" @click="changeStata(scope.row.jobNo,1)">在职</el-button>
+          <el-button v-if="scope.row.active == 3" type="text" size="small" @click="changeStata(scope.row.jobNo,0)">离职</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -236,12 +250,13 @@
           position: '',
           director: ''
         },
-        actives: [{id: 0, value: '离职'}, {id: 1, value: '在职'}],
+        actives: [{id: 0, value: '离职'}, {id: 1, value: '在职'},{id: 3, value: '异常'}],
         supervisors: [],
         levels: [],
         lineTypes: [],
         fileUploadBtnText: '导入在职数据',
         fileUploadBtnText1: '导入离职数据',
+        fileUploadBtnText2: '导入邮箱数据',
         dataList: [],
         positions: [],
         pageIndex: 1,
@@ -345,7 +360,7 @@
             url: this.$http.adornUrl('/employee/setQuit'),
             method: 'post',
           params: this.$http.adornParams({
-            'id': id,
+            'jobNo': id,
             'active': type
           })
           }).then(({data}) => {
@@ -413,6 +428,32 @@
         } else {
           this.$message.error(data.msg)
           this.fileUploadBtnText1 = '导入数据'
+        }
+      })
+      },
+      fileUploadSuccess2 (response, file, fileList) {
+        if (response) {
+          this.$message({type: response.status, message: response.msg})
+        }
+        // this.loadEmps()
+        this.fileUploadBtnText2 = '导入邮箱数据'
+      },
+      fileUploadError2 (err, file, fileList) {
+        // this.fileUploadBtnText1 = '正在导入'
+      },
+      beforeFileUpload2 (file) {
+        this.fileUploadBtnText2 = '正在导入'
+        let formData = new FormData()
+        formData.append('file', file)
+        this.$http.post(this.$http.adornUrl('/employee/upEmail'), formData)
+          .then(({data}) => {
+          if (data && data.code === 0) {
+          this.$message.success('导入成功')
+          this.fileUploadBtnText2 = '导入邮箱数据'
+          this.getDataList()
+        } else {
+          this.$message.error(data.msg)
+          this.fileUploadBtnText2 = '导入邮箱数据'
         }
       })
       }

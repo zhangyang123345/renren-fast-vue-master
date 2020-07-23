@@ -70,6 +70,9 @@
         <el-button type="primary" @click="export2Exce()" ><i class="fa fa-lg fa-level-down"
                                                              style="margin-right: 5px"></i>导出数据
         </el-button>
+        <el-button type="primary" @click="setTarget()" v-if="isAuth('project:setTarget')" >
+          <i class="fa fa-lg fa-level-down"  style="margin-right: 5px"></i>校准目标
+        </el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -97,15 +100,10 @@
         label="状态">
       </el-table-column>
       <el-table-column
-        prop="lscDate"
-        header-align="center"
-        align="center"
-        label="最后修改时间">
-      </el-table-column>
-      <el-table-column
         prop="projectName"
         header-align="center"
         align="center"
+        width="200px"
         label="项目名称">
       </el-table-column>
       <el-table-column
@@ -126,29 +124,33 @@
         align="center"
         label="审核主管邮箱">
       </el-table-column>
-      <el-table-column
+ <!--     <el-table-column
         prop="teamLeader"
         header-align="center"
         align="center"
         label="项目领导者">
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column
         prop="leaderEmail"
         header-align="center"
         align="center"
         label="领导者邮箱">
       </el-table-column>
+      <!--<el-table-column-->
+        <!--prop="teamMember"-->
+        <!--header-align="center"-->
+        <!--align="center"-->
+        <!--label="项目队员">-->
+      <!--</el-table-column>-->
       <el-table-column
-        prop="teamMember"
         header-align="center"
         align="center"
-        label="项目队员">
-      </el-table-column>
-      <el-table-column
-        prop="memberEmail"
-        header-align="center"
-        align="center"
-        label="队员邮箱">
+        label="队员邮箱"
+        width="200px"
+        >
+        <template slot-scope="scope">
+           <p style="line-height: 10px;" v-for="item in scope.row.memberEmail.split(',') ">{{item}}</p>
+        </template>
       </el-table-column>
       <el-table-column
         prop="customerField"
@@ -175,6 +177,12 @@
         label="提交时间">
       </el-table-column>
       <el-table-column
+        prop="lscDate"
+        header-align="center"
+        align="center"
+        label="最后修改时间">
+      </el-table-column>
+      <el-table-column
         prop="closeDate"
         header-align="center"
         align="center"
@@ -184,7 +192,7 @@
         fixed="right"
         header-align="center"
         align="center"
-        width="80"
+        width="50"
         label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.projectId)">详情</el-button>
@@ -302,6 +310,23 @@
           this.dataListLoading = false
         })
       },
+      // 校正目标
+      setTarget () {
+        this.startLoading()
+        this.$http({
+          url: this.$http.adornUrl('/project/setTarget'),
+          method: 'post',
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+          this.$message.success('校准成功')
+          this.getDataList()
+        } else {
+          this.$message.error(data.msg)
+        }
+        this.endLoading()
+      })
+      },
+
       // 导出数据
       export2Exce () {
         this.startLoading()
@@ -366,7 +391,7 @@
           this.$message({type: response.status, message: response.msg})
         }
         // this.loadEmps()
-        this.fileUploadBtnText = '导入数据'
+        this.fileUploadBtnText = '导入案件数据'
       },
       fileUploadError (err, file, fileList) {
       },
@@ -379,11 +404,11 @@
           .then(({data}) => {
           if (data && data.code === 0) {
           this.$message.success('导入成功')
-          this.fileUploadBtnText = '导入数据'
+          this.fileUploadBtnText = '导入案件数据'
           this.getDataList()
         } else {
           this.$message.error(data.msg)
-          this.fileUploadBtnText = '导入数据'
+          this.fileUploadBtnText = '导入案件数据'
         }
         this.endLoading()
       })

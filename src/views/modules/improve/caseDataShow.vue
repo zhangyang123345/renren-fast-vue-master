@@ -423,7 +423,6 @@
               name: '完成率',
               type: 'line',
               data: this.rateIL,
-              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -437,7 +436,6 @@
               name: '目标',
               type: 'line',
               data: this.nearDatalistC,
-              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -508,15 +506,20 @@
             },
             {
               name: '目标',
-              type: 'line',
+              type: 'bar',
               data: this.targetIL,
               // smooth: true,
+              barWidth: 20, // 柱图宽度
               itemStyle: {
                 normal: {
-                  lineStyle: {
-                    width: 3
-                  },
-                  label: {show: true}
+                  label: {
+                    show: true,	 // 开启显示
+                    position: 'top',	// 在上方显示
+                    textStyle: {	    // 数值样式
+                      color: 'black',
+                      fontSize: 16
+                    }
+                  }
                 }
               }
             }
@@ -565,7 +568,6 @@
               name: '完成率',
               type: 'line',
               data: this.rateDL,
-              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -579,7 +581,6 @@
               name: '目标',
               type: 'line',
               data: this.nearDatalistC,
-              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -650,15 +651,20 @@
             },
             {
               name: '目标',
-              type: 'line',
+              type: 'bar',
               data: this.targetDL,
               smooth: false,
+              barWidth: 20, // 柱图宽度
               itemStyle: {
                 normal: {
-                  lineStyle: {
-                    width: 3
-                  },
-                  label: {show: true}
+                  label: {
+                    show: true,	 // 开启显示
+                    position: 'top',	// 在上方显示
+                    textStyle: {	    // 数值样式
+                      color: 'black',
+                      fontSize: 16
+                    }
+                  }
                 }
               }
             }
