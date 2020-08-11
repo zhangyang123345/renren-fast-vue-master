@@ -57,6 +57,8 @@ const router = new Router({
   routes: globalRoutes.concat(mainRoutes)
 })
 
+var menuRout = new Map()
+
 router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问

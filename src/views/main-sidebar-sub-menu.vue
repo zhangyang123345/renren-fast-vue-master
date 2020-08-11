@@ -1,7 +1,9 @@
-<template>
+<template >
   <el-submenu
     v-if="menu.list && menu.list.length >= 1"
+    v-show="this.menuRout.get('menuId'+menu.menuId) || menu.parentId != 0"
     :index="menu.menuId + ''"
+    :id="'menuId_'+menu.menuId"
     :popper-class="'site-sidebar--' + sidebarLayoutSkin + '-popper'">
     <template slot="title">
       <icon-svg :name="menu.icon || ''" class="site-sidebar__menu-icon"></icon-svg>

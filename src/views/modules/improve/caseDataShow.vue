@@ -423,6 +423,7 @@
               name: '完成率',
               type: 'line',
               data: this.rateIL,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -435,6 +436,7 @@
             {
               name: '目标',
               type: 'line',
+              smooth: true,
               data: this.nearDatalistC,
               itemStyle: {
                 normal: {
@@ -568,6 +570,7 @@
               name: '完成率',
               type: 'line',
               data: this.rateDL,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -581,6 +584,7 @@
               name: '目标',
               type: 'line',
               data: this.nearDatalistC,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -734,7 +738,7 @@
       })
         this.myChart6.setOption({
           title: {
-            text: 'PVD改善节省金额各状态占比(共:' + this.dataForm.ztNum.toFixed(2) + '￥)',
+            text: 'PVD改善节省金额类型占比(共:' + this.dataForm.ztNum.toFixed(2) + '￥)',
             left: 'center',
             textStyle: {
               color: 'RGB(102,102,102)'

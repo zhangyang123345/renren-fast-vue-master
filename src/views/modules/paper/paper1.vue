@@ -1,254 +1,41 @@
 <template>
-  <div >
-  <el-row :gutter="24" class="el-row" type="flex">
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('451692')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <p class="homePVD">PVD厂</p>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.xxsJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.xxsJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.xxsAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('243221')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-               <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/gxw.jpg">
-               <!--</span>-->
-              </el-row>
-            <el-row>
-            <p class="homeP">郭祥伟</p>
-              </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.gxwJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.gxwJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.gxwAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('915484')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/yp.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">岳平</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.ypJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.ypJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.ypAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('308586')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/wqj.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">王启军</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.wqjJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.wqjJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.wqjAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('943139')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/zy.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">周颖</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.zyJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.zyJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.zyAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-    <el-col :span="4" style="cursor:pointer;">
-      <div class="cardEl" @click="cardClick('951976')">
-      <el-card class="box-card" style="background-color:rgba(245,248,253,0)">
-        <el-row :gutter="24" class="el-row" type="flex">
-          <el-col :span="8">
-            <el-row>
-              <!--<span class="el-dropdown-link">-->
-              <img class="homeimg" src="~@/assets/img/dhj.jpg">
-              <!--</span>-->
-            </el-row>
-            <el-row>
-            <p class="homeP">邓海军</p>
-            </el-row>
-          </el-col>
-          <el-col :span="16">
-            <el-row class="paddingS">
-              <span class="homespan">参与人数：</span>
-              <span class="homevalue">{{dataForm.dhjJion}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">及格人数：</span>
-              <span class="homevalue">{{dataForm.dhjJg}}</span>
-            </el-row>
-            <el-row class="paddingS">
-              <span class="homespan">总人数：</span>
-              <span class="homevalue">{{dataForm.dhjAll}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
-      </div>
-    </el-col>
-  </el-row>
-    <el-row :gutter="24" class="el-row" type="flex">
-      <el-col :span="12">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-        <div id="echart1" style="height: 35vh"></div>
-        </el-card>
+  <div class="view">
+    <el-row :gutter="24" class="el-row head-div" type="flex">
+      <el-col span="12">
+        <div class="videoBox">
+        </div>
       </el-col>
-      <el-col :span="12">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-          <div style="height: 35vh">
-            <span @click="export2Exce()" style="cursor:pointer;"><p class="ptitle">未考试人员名单(点击导出)</p></span>
-            <el-table
-              :data="dataList"
-              border
-              :row-style="tableRowStyle"
-              :header-cell-style="tableHeaderColor"
-              v-loading="dataListLoading"
-              style="width: 100%;">
-              <el-table-column
-                prop="jobNo"
-                header-align="center"
-                align="center"
-                label="工号">
-              </el-table-column>
-              <el-table-column
-                prop="name"
-                header-align="center"
-                align="center"
-                label="姓名">
-              </el-table-column>
-              <el-table-column
-                prop="director"
-                header-align="center"
-                align="center"
-                label="主管">
-              </el-table-column>
-            </el-table>
-            <el-pagination
-              @size-change="sizeChangeHandle"
-              @current-change="currentChangeHandle"
-              :current-page="pageIndex"
-              :page-sizes="[5]"
-              :page-size="pageSize"
-              :total="totalPage"
-              layout="total, sizes, prev, pager, next, jumper">
-            </el-pagination>
-          </div>
-        </el-card>
+      <el-col span="12">
+        <div class="imageBox">
+        </div>
       </el-col>
     </el-row>
-    <el-row :gutter="24" class="el-row" type="flex">
-      <el-col :span="24">
-        <el-card class="box-card" style="background-color:rgba(245,248,253,1)">
-          <div id="echart2" style="height: 30vh"></div>
-        </el-card>
+    <el-row :gutter="24" class="el-row buttom-div" type="flex">
+      <el-col span="24">
+        <div class="flowBox">
+            <el-card class="boxItme" v-for="item in menuList"
+                     :key="item" style="background-color:rgba(245,248,253,0)"
+                     :click="openMenu('menuId_'+item.itemID)">
+              <el-row :gutter="24" class="el-row" type="flex">
+                <el-col :span="24">
+                  <svg aria-hidden="true" class="site-sidebar__menu-icon icon-svg" :class="item.sicon"><use xlink:href="" :href="item.icon"></use></svg>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <p style="position: inherit;" class="homePVD">{{item.name}}</p>
+                </el-col>
+              </el-row>
+            </el-card>
+        </div>
       </el-col>
     </el-row>
-    </div>
+  </div>
 </template>
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         dataForm: {
           xxsAll: 0,
@@ -280,12 +67,13 @@
         exportList: [],
         nearDatalistJ: [],
         nearDatalistC: [],
-        hisDatalistJ: [91, 94, 98, 92, 91, 96],
-        hisDatalistC: [80, 86, 80, 85, 93, 96],
+        hisDatalistJ: [],
+        hisDatalistC: [],
         nameList: [],
-        dateListTime: ['2020-2-1', '2020-3-4', '2020-4-10', '2020-4-20', '2020-5-7', '2020-5-16', '2020-6-1'],
+        menuList: [],
+        dateListTime: [],
         fileUploadBtnText: '导入数据',
-        dataList: [{id: '43560', name: '王全龙', supervisor: '王梅'}, {id: '422112', name: '雷小平', supervisor: '王梅'}, {id: '74745', name: '唐进', supervisor: '俞长勇'}, {id: '33433', name: '罗忠平', supervisor: '甘茂林'}, {id: '342443', name: '张祥', supervisor: '陈名平'}],
+        dataList: [],
         pageIndex: 1,
         pageSize: 5,
         totalPage: 0,
@@ -296,421 +84,33 @@
         myChart1: ''
       }
     },
-    components: {
-    },
+    components: {},
     activated () {
-      this.getDataList()
+      this.menuCard()
     },
     mounted () {
-      this.drawLine()
     },
     methods: {
-      // 卡片点击事件
-      cardClick (jobNo) {
-        this.dataForm.jobNo = jobNo
-        this.getDataList('1')
-       //  if (name == '岳平') {
-       //    this.totalPage = 4
-       //    this.nameList = ['岳平', '蒋春笋', '刘双龙', '陈名平']
-       //    this.nearDatalistC = [98, 97, 94, 99]
-       //    this.nearDatalistJ = [97, 95, 96, 97]
-       //    this.dataList = [{id: '23422112', name: '李勇', supervisor: '陈名平'}, {id: '23447745', name: '熊杰', supervisor: '陈名平'}, {id: '1433433', name: '罗旋', supervisor: '陈名平'}, {id: '1342443', name: '张祥', supervisor: '陈名平'}]
-       //  } else {
-       //    this.nearDatalistJ = [81, 71, 90, 70, 80, 60]
-       //    this.nearDatalistC = [90, 96, 91, 98, 96, 99]
-       //    this.nameList = ['PVD厂', '郭祥伟', '岳平', '王启军', '周颖', '邓海军']
-       //    this.dataList = [{id: '43560', name: '王全龙', supervisor: '王梅'}, {id: '422112', name: '雷小平', supervisor: '王梅'}, {id: '74745', name: '唐进', supervisor: '俞长勇'}, {id: '33433', name: '罗忠平', supervisor: '甘茂林'}, {id: '342443', name: '张祥', supervisor: '陈名平'}]
-       //  }
-       // let options = {
-       //   xAxis: {
-       //     data: this.nameList
-       //   }
-       // }
-       // this.myChart.setOption(options)
-        // nearDatalistJ: [81, 71, 90, 70, 80, 60],
-        //   nearDatalistC: [90, 96, 91, 98, 96, 99],
-      },
-      tableRowStyle({ row, rowIndex }) {
-        return 'background-color: lightblue'
-      },
-      // 修改table header的背景色
-      tableHeaderColor({row, column, rowIndex, columnIndex}) {
-        if (rowIndex === 0) {
-          return 'background-color: lightseagreen;color: #fff;font-weight: 500;'
-        }
-      },
-      drawLine () {
-        // 基于准备好的dom，初始化echarts实例
-        this.myChart = this.$echarts.init(document.getElementById('echart1'))
-         this.myChart1 = this.$echarts.init(document.getElementById('echart2'))
-        // 绘制图表
-        this.myChart.setOption({
-
-          title: {
-            text: '近期考试数据'
-          },
-          tooltip: {
-            trigger: 'axis',
-            formatter: '{b0}<br/>{a0}: {c0}%<br />{a1}: {c1}%<br />'
-          },
-          color: ['RGB(90,177,239)', 'RGB(46,199,201)'],
-          legend: {
-            data: ['及格率', '参与率']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: this.nameList
-          },
-          yAxis: {
-            type: 'value',
-            axisLabel: {
-              show: true,
-              interval: 'auto',
-              formatter: '{value}%'
-            },
-            show: true
-          },
-          series: [
-            {
-              name: '及格率',
-              type: 'line',
-              data: this.nearDatalistJ,
-              smooth: true,
-              itemStyle: {
-                normal: {
-                  lineStyle: {
-                    width: 3
-                  }
-                }
-              }
-            },
-            {
-              name: '参与率',
-              type: 'line',
-              data: this.nearDatalistC,
-              smooth: true,
-              itemStyle: {
-                normal: {
-                  lineStyle: {
-                    width: 3
-                  }
-                }
-              }
-            }
-          ]
-        })
-        this.myChart1.setOption({
-            title: {
-              text: '历史考核数据'
-            },
-            tooltip: {
-              trigger: 'axis',
-              formatter: '{b0}<br/>{a0}: {c0}%<br />{a1}: {c1}%<br />'
-            },
-          color: ['RGB(90,177,239)', 'RGB(46,199,201)'],
-            legend: {
-              data: ['及格率', '参与率']
-            },
-            grid: {
-              left: '3%',
-              right: '4%',
-              bottom: '3%',
-              containLabel: true
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
-            xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: this.dateListTime
-            },
-            yAxis: {
-              type: 'value',
-              axisLabel: {
-                show: true,
-                interval: 'auto',
-                formatter: '{value}%'
-              },
-              show: true
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.hisDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.hisDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-      })
-      },
-      // 获取数据列表
-      getDataList (type) {
-        if (type == '1') {
-          this.pageIndex = 1
-            this.pageSize = 5
-            this.totalPage = 0
-        }
-        this.nameList = []
-        this.nearDatalistC = []
-        this.nearDatalistJ = []
-        this.dataListLoading = true
+      menuCard () {
         this.$http({
-          url: this.$http.adornUrl('/ansower/examDataByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
-        }).then(({data}) => {
-          console.log('===============')
-          console.log(data)
-          if (data && data.code === 0) {
-            for (var i = 0; i < data.list.length; i++) {
-              if(this.dataForm.jobNo == '451692'){
-              if (data.list[i].name == 'PVD厂') {
-                this.dataForm.xxsAll = data.list[i].total
-                this.dataForm.xxsJion = data.list[i].examCount
-                this.dataForm.xxsJg = data.list[i].qualified
-                  this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '郭祥伟') {
-                this.dataForm.gxwAll = data.list[i].total
-                this.dataForm.gxwJion = data.list[i].examCount
-                this.dataForm.gxwJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '王启军') {
-                this.dataForm.wqjAll = data.list[i].total
-                this.dataForm.wqjJion = data.list[i].examCount
-                this.dataForm.wqjJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '岳平') {
-                this.dataForm.ypAll = data.list[i].total
-                this.dataForm.ypJion = data.list[i].examCount
-                this.dataForm.ypJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '邓海军') {
-                this.dataForm.dhjAll = data.list[i].total
-                this.dataForm.dhjJion = data.list[i].examCount
-                this.dataForm.dhjJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '周颖') {
-                this.dataForm.zyAll = data.list[i].total
-                this.dataForm.zyJion = data.list[i].examCount
-                this.dataForm.zyJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              } else {
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-            }
-            console.log('sj====' + this.nearDatalistC)
-          let options = {
-            xAxis: {
-              data: this.nameList
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.nearDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.nearDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-          }
-          this.myChart.setOption(options)
-          } else {
-            // this.dataList = []
-            // this.totalPage = 0
-          }
-          this.dataListLoading = false
-        })
-        this.$http({
-          url: this.$http.adornUrl('/unexam/searchListByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo,
-            'page': this.pageIndex,
-            'rows': this.pageSize
-          })
-        }).then(({data}) => {
-          console.log(data)
-          if (data && data.code === 0) {
-            this.dataList = data.data.list
-          this.totalPage = data.data.total
-        } else {
-        }
-      })
-        this.$http({
-          url: this.$http.adornUrl('/ansower/hisDataByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
-        }).then(({data}) => {
-          console.log(data)
-        if (data && data.code === 0) {
-          this.dateListTime = data.data.time
-          this.hisDatalistC = data.data.examRate
-          this.hisDatalistJ = data.data.qualifRate
-          let options1 = {
-            xAxis: {
-              data: this.dateListTime
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.hisDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.hisDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-          }
-          this.myChart1.setOption(options1)
-        } else {
-        }
-      })
-      },
-      // 每页数
-      sizeChangeHandle (val) {
-        this.pageSize = val
-        this.pageIndex = 1
-        this.getDataList()
-      },
-      // 当前页
-      currentChangeHandle (val) {
-        this.pageIndex = val
-        this.getDataList()
-      },
-      // 多选
-      selectionChangeHandle (val) {
-        this.dataListSelections = val
-      },
-      // 新增 / 修改
-      addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
-        this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(id)
-        })
-      },
-      // 导出未考试人员
-      export2Exce () {
-        // 获取离职数据
-        this.$http({
-          url: this.$http.adornUrl('/unexam/exportExcel'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
+          url: this.$http.adornUrl('/sys/menu/nav'),
+          method: 'get',
+          params: this.$http.adornParams()
         }).then(({data}) => {
           if (data && data.code === 0) {
-          this.exportList = []
-            this.exportList = data.list
-          require.ensure([], () => {
-            const { export_json_to_excel } = require('../../../vendor/Export2Excel')
-            const tHeader = ['工号', '姓名', '试卷名', '试卷类型', '状态', '部门', '职称', '主管']
-            // 上面设置Excel的表格第一行的标题
-            const filterVal = ['jobNo', 'name', 'title', 'ptype', 'status', 'department', 'position', 'director']
-            const list = this.exportList
-            const data = this.formatJson(filterVal, list)
-            export_json_to_excel(tHeader, data, '未考试人员名单表')
-        })
-        }
+            for(var item in data.menuList){
+              data.menuList[item].sicon = 'icon-svg__'+data.menuList[item].icon
+              data.menuList[item].icon = '#icon-'+data.menuList[item].icon
+            }
+            this.menuList = data.menuList
+          }
+      }).catch((e) => {
+          console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+        router.push({ name: 'login' })
       })
       },
-      formatJson (filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => v[j]))
+      openMenu (id) {
+        menuRout.set(id,true);
       }
     }
   }
@@ -720,6 +120,51 @@
     /*background-color: rgba(239,241,244,1);*/
     /*height: 85vh;*/
     /*width: 100vw;*/
+  }
+  .boxItme .icon-svg{
+    font-size:38px;
+  }
+  .boxItme{
+    width:100px;
+    height:100px;
+    font-size: 9px;
+    text-align: center;
+    display: inline-block;
+    margin: 30px 2px;
+  }
+  .boxItme .site-sidebar__menu-icon{
+    margin-right: 0px;
+  }
+  .view{
+    height:100%;
+  }
+  .head-div{
+    height:70%;
+  }
+  .buttom-div{
+    margin-top:1%;
+  }
+  .imageBox{
+    width:100%;
+    height: 600px;
+    border: #0000cc solid  1px;
+  }
+  .videoBox{
+    width:100%;
+    height: 600px;
+    border: #0000cc solid  1px;
+  }
+  .iconBox{
+    width:200%;
+    height: 155px;
+    padding-top: 1%;
+    border: #0000cc solid  1px;
+  }
+  .flowBox{
+    border: #0000cc solid  1px;
+    height: 160px;
+    white-space: nowrap;
+    overflow-y: hidden;
   }
   .cardEl {
     transition: all .5s;

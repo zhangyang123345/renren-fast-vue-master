@@ -2,8 +2,9 @@
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
+        <link rel="shortcut icon" type="image/x-icon" href="../../static/img/favicon3.ico">
         <a class="site-navbar__brand-lg" href="javascript:;">PVD内务</a>
-        <a class="site-navbar__brand-mini" href="javascript:;">考试信息</a>
+        <a class="site-navbar__brand-mini" href="javascript:;">PVD内务</a>
       </h1>
     </div>
     <div class="site-navbar__body clearfix">
@@ -123,6 +124,7 @@
             data: this.$http.adornData()
           }).then(({data}) => {
             if (data && data.code === 0) {
+              this.menuRout.splice(0,this.menuRout.size())
               clearLoginInfo()
               this.$router.push({ name: 'login' })
             }

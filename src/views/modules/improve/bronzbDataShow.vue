@@ -211,6 +211,7 @@
               name: '完成率',
               type: 'line',
               data: this.rateIL,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -224,6 +225,7 @@
               name: '目标',
               type: 'line',
               data: this.nearDatalistC,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -355,6 +357,7 @@
               name: '完成率',
               type: 'line',
               data: this.rateDL,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {
@@ -368,6 +371,7 @@
               name: '目标',
               type: 'line',
               data: this.nearDatalistC,
+              smooth: true,
               itemStyle: {
                 normal: {
                   lineStyle: {

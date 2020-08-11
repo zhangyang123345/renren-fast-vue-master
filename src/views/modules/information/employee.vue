@@ -11,6 +11,12 @@
         <el-input v-model="dataForm.director" placeholder="主管" clearable></el-input>
       </el-form-item>
       <el-form-item>
+        <el-select  v-model="dataForm.costCategory" placeholder="成本别" clearable filterable>
+          <el-option v-for="(item,index) in costCategorys" :key="index" :label="item.costCategory" :value="item.costCategory" >
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
         <el-select  v-model="dataForm.lineType" placeholder="线别" clearable filterable>
           <el-option v-for="(item,index) in lineTypes" :key="index" :label="item.lineType" :value="item.lineType" >
           </el-option>
@@ -47,9 +53,10 @@
       <!--</el-form-item>-->
       <el-form-item>
         <el-button @click="getDataList('1')">查询</el-button>
-        <el-button  type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button  type="primary" @click="addOrUpdateHandle()" v-if="isAuth('employee:add')">新增</el-button>
         <!--<el-button  type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>-->
           <el-upload
+            v-if="isAuth('employee:impEmpl')"
             :show-file-list="false"
             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
             action="#"
@@ -61,6 +68,7 @@
             </el-button>
           </el-upload>
         <el-upload
+          v-if="isAuth('employee:impOut')"
           :show-file-list="false"
           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
           action="#"
@@ -72,6 +80,7 @@
           </el-button>
         </el-upload>
         <el-upload
+          v-if="isAuth('employee:impEmail')"
           :show-file-list="false"
           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
           action="#"
@@ -82,6 +91,12 @@
                                                                               style="margin-right: 5px"></i>{{fileUploadBtnText2}}
           </el-button>
         </el-upload>
+        <el-button type="primary" @click="export2Exce()" v-if="isAuth('employee:export')">
+            <i class="fa fa-lg fa-level-down"style="margin-right: 5px"></i>导出信息
+        </el-button>
+        <el-button type="primary" @click="sRegister()" v-if="isAuth('employee:sRegister')">
+            <i class="fa fa-lg fa-level-down"style="margin-right: 5px"></i>注册用户
+        </el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -115,17 +130,17 @@
         label="性别">
       </el-table-column>
       <el-table-column
-        prop="pCategory"
+        prop="costCategory"
         header-align="center"
         align="center"
-        label="人员类别">
+        label="成本别">
       </el-table-column>
-      <el-table-column
-        prop="phone"
-        header-align="center"
-        align="center"
-        label="联系方式">
-      </el-table-column>
+      <!--<el-table-column-->
+        <!--prop="phone"-->
+        <!--header-align="center"-->
+        <!--align="center"-->
+        <!--label="联系方式">-->
+      <!--</el-table-column>-->
       <el-table-column
         prop="email"
         header-align="center"
@@ -204,12 +219,13 @@
         </template>
       </el-table-column>
       <el-table-column
+        v-if="isAuth('employee:add')"
         fixed="right"
         header-align="center"
         align="center"
         width="150"
         label="操作">
-        <template slot-scope="scope">
+        <template slot-scope="scope" >
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.jobNo)">修改</el-button>
           <el-button v-if="scope.row.active == 1" type="text" size="small" @click="changeStata(scope.row.jobNo,0)">离职</el-button>
           <el-button v-if="scope.row.active == 0" type="text" size="small" @click="changeStata(scope.row.jobNo,1)">在职</el-button>
@@ -242,6 +258,7 @@
           key: '',
           level: '',
           lineType: '',
+          costCategory: '',
           supervisor: '',
           jobNo: '',
           active: 1,
@@ -254,9 +271,11 @@
         supervisors: [],
         levels: [],
         lineTypes: [],
+        costCategorys: [{costCategory: 'IL'}, {costCategory: 'DL'}],
         fileUploadBtnText: '导入在职数据',
         fileUploadBtnText1: '导入离职数据',
         fileUploadBtnText2: '导入邮箱数据',
+        exportList: [],
         dataList: [],
         positions: [],
         pageIndex: 1,
@@ -291,6 +310,7 @@
             'jobNo': this.dataForm.jobNo,
             'name': this.dataForm.name,
             'lineType': this.dataForm.lineType,
+            'costCategory': this.dataForm.costCategory,
             'position': this.dataForm.position,
             'director': this.dataForm.director,
             'active': this.dataForm.active
@@ -348,6 +368,28 @@
         this.$nextTick(() => {
           this.$refs.addOrUpdate.init(id)
         })
+      },
+      // 注册用户
+      sRegister () {
+        this.$confirm(`确认批量注册用户?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+          url: this.$http.adornUrl('/employee/sRegister'),
+          method: 'post'
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+          this.$message({
+            message: '操作成功',
+            type: 'success'
+        })
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+      })
       },
       // 修改状态
       changeStata (id, type) {
@@ -456,7 +498,46 @@
           this.fileUploadBtnText2 = '导入邮箱数据'
         }
       })
-      }
+      },
+      // 导出数据
+      export2Exce () {
+        this.startLoading()
+        this.$http({
+          url: this.$http.adornUrl('/employee/export'),
+          method: 'post',
+          params: this.$http.adornParams({
+            'page': this.pageIndex,
+            'rows': this.pageSize,
+            'jobNo': this.dataForm.jobNo,
+            'name': this.dataForm.name,
+            'lineType': this.dataForm.lineType,
+            'costCategory': this.dataForm.costCategory,
+            'position': this.dataForm.position,
+            'director': this.dataForm.director,
+            'active': this.dataForm.active
+          })
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+          this.exportList = data.list
+          require.ensure([], () => {
+            const { export_json_to_excel } = require('@/vendor/Export2Excel')
+            const tHeader = ['工号', '姓名','备注','性别','成本别','联系方式', '邮箱', '厂别', '部门', '职称','班别', '线别','办公楼栋','上级', '主管','入职日期','状态']
+            // 上面设置Excel的表格第一行的标题
+            const filterVal = ['jobNo', 'name', 'comment', 'sex','costCategory','phone','email','plantType', 'department', 'position','wclass', 'lineType','officeLocation','pjName', 'director', 'entryDate' , 'active']
+            const list = this.exportList
+            const data = this.formatJson(filterVal, list)
+            export_json_to_excel(tHeader, data, '员工信息')
+        })
+        } else {
+          this.$message.error(data.msg)
+        }
+        this.endLoading()
+      })
+      },
+      formatJson (filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v[j]))
+      },
+
     }
   }
 </script>

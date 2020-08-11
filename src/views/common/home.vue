@@ -1,515 +1,128 @@
 <template>
-    <div >
-      <el-row :gutter="24" class="el-row" type="flex">
-        <el-col span="6">
-          <el-row :gutter="24" class="el-row" type="flex">
-            <el-col span="24">
-              <div class="imageBox">
-                <img id='leftReview_2 ' style="height:280px" class="image" src="../../images/AIM_1.jpg"/>
-              </div>
-            </el-col>
-          </el-row>
-           <el-row :gutter="24" class="el-row" type="flex">
-             <el-col span="24">
-               <div class="imageBox">
-                  <img id='leftReview_1' style="margin-top:20px;height: 106%;" class="image" src="../../images/safe.jpg"/>
-               </div>
-             </el-col>
-           </el-row>
-        </el-col>
-        <el-col span="6">
-          <el-row :gutter="24" class="el-row" type="flex">
-            <el-col span="24">
-              <div class="imageBox">
-                <img id='centReview_2' style="height:280px" class="image" src="../../images/AIM_2.jpg"/>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="24" class="el-row" type="flex">
-            <el-col span="24">
-              <div class="imageBox">
-                <img id='leftReview_3 ' style="margin-top:20px;height: 106%;" class="image" src="../../images/op_recommend.jpg"/>
-              </div>
-            </el-col>
-          </el-row>
-        </el-col>
-        <el-col span="6">
-          <div class="imageBox">
-            <img id='rightReview_1' class="image" src="../../images/dbp_challenge.jpg"/>
+  <div class="view">
+    <el-row :gutter="24" class="el-row head-div" type="flex">
+      <el-col span="12">
+        <el-row >
+          <el-col>
+            <div class="imageBox">
+              <el-carousel style="width:100%;height:100%" interval="10000">
+                <el-carousel-item style="width:100%;height:100%" v-for="item in imageList" :key="item">
+                  <img  class="image" style="width:100%;" :src="item"/>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col span="12">
+        <div class="videoBox">
+          <video-player class="video-player vjs-custom-skin"
+                        ref="videoPlayer"
+                        :playsinline="true"
+                        :options="playerOptions">
+          </video-player>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="24" class="el-row buttom-div" type="flex">
+      <el-col span="24">
+        <div class="flowBox">
+          <div class="boxItme" v-for="item in menuList"
+               :key="item" @click="openMenu('menuId'+item.menuId,item.list[0])">
+            <el-card class="boxCard"  style="background-color:rgba(245,248,253,0)">
+              <el-row :gutter="24" class="el-row" type="flex">
+                <el-col :span="24">
+                  <svg aria-hidden="true" class="site-sidebar__menu-icon icon-svg" :class="item.sicon"><use xlink:href="" :href="item.icon"></use></svg>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <p style="position: inherit;" class="homePVD">{{item.name}}</p>
+                </el-col>
+              </el-row>
+            </el-card>
           </div>
-        </el-col>
-        <el-col span="6">
-          <div class="imageBox">
-            <img id='rightReview_2' class="image" src="../../images/jabil.jpg"/>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
+  import router from '@/router'
   export default {
-    data () {
+    inject: ['reload'],
+    data() {
       return {
-        dataForm: {
-          xxsAll: 0,
-          xxsJion: 0,
-          xxsJg: 0,
-          gxwAll: 0,
-          gxwJion: 0,
-          gxwJg: 0,
-          ypAll: 0,
-          ypJion: 0,
-          ypJg: 0,
-          wqjAll: 0,
-          wqjJion: 0,
-          wqjJg: 0,
-          zyAll: 0,
-          zyJion: 0,
-          zyJg: 0,
-          dhjAll: 0,
-          dhjJion: 0,
-          dhjJg: 0,
-          nearpassRate: [],
-          nearparticipationRate: [],
-          passRate: [],
-          participationRate: [],
-          keytwo: '',
-          key: '',
-          jobNo: '451692'
-        },
-        exportList: [],
-        nearDatalistJ: [],
-        nearDatalistC: [],
-        hisDatalistJ: [],
-        hisDatalistC: [],
-        nameList: [],
-        dateListTime: [],
-        fileUploadBtnText: '导入数据',
-        dataList: [],
-        pageIndex: 1,
-        pageSize: 5,
-        totalPage: 0,
-        dataListLoading: false,
-        dataListSelections: [],
-        addOrUpdateVisible: false,
-        myChart: '',
-        myChart1: ''
+        imageList:['../../../static/img/homePage_12.png','../../../static/img/homePage_13.png'],
+        menuList:[],
+        playerOptions: {
+          playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
+          autoplay: true, // 如果为true,浏览器准备好时开始回放。
+          muted: true, // 默认情况下将会消除任何音频。
+          loop: false, // 是否视频一结束就重新开始。
+          preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+          language: 'zh-CN',
+          aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+          fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+          sources: [{
+            type: "video/mp4", // 类型
+            src: 'http://pvdop2dcm:8002/Trace1.0.mp4' // url地址
+          }],
+          poster: '', // 封面地址
+          notSupportedMessage: '此视频暂无法播放，请稍后再试', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
+          controlBar: {
+            timeDivider: true, // 当前时间和持续时间的分隔符
+            durationDisplay: true, // 显示持续时间
+            remainingTimeDisplay: false, // 是否显示剩余时间功能
+            fullscreenToggle: true // 是否显示全屏按钮
+          }
+        }
       }
     },
-    components: {
-    },
     activated () {
+      this.menuCard()
     },
     mounted () {
     },
+    components: {
+    },
     methods: {
-      // 卡片点击事件
-      cardClick (jobNo) {
-        this.dataForm.jobNo = jobNo
-        this.getDataList('1')
-       //  if (name == '岳平') {
-       //    this.totalPage = 4
-       //    this.nameList = ['岳平', '蒋春笋', '刘双龙', '陈名平']
-       //    this.nearDatalistC = [98, 97, 94, 99]
-       //    this.nearDatalistJ = [97, 95, 96, 97]
-       //    this.dataList = [{id: '23422112', name: '李勇', supervisor: '陈名平'}, {id: '23447745', name: '熊杰', supervisor: '陈名平'}, {id: '1433433', name: '罗旋', supervisor: '陈名平'}, {id: '1342443', name: '张祥', supervisor: '陈名平'}]
-       //  } else {
-       //    this.nearDatalistJ = [81, 71, 90, 70, 80, 60]
-       //    this.nearDatalistC = [90, 96, 91, 98, 96, 99]
-       //    this.nameList = ['PVD厂', '郭祥伟', '岳平', '王启军', '周颖', '邓海军']
-       //    this.dataList = [{id: '43560', name: '王全龙', supervisor: '王梅'}, {id: '422112', name: '雷小平', supervisor: '王梅'}, {id: '74745', name: '唐进', supervisor: '俞长勇'}, {id: '33433', name: '罗忠平', supervisor: '甘茂林'}, {id: '342443', name: '张祥', supervisor: '陈名平'}]
-       //  }
-       // let options = {
-       //   xAxis: {
-       //     data: this.nameList
-       //   }
-       // }
-       // this.myChart.setOption(options)
-        // nearDatalistJ: [81, 71, 90, 70, 80, 60],
-        //   nearDatalistC: [90, 96, 91, 98, 96, 99],
-      },
-      tableRowStyle({ row, rowIndex }) {
-        return 'background-color: lightblue'
-      },
-      // 修改table header的背景色
-      tableHeaderColor({row, column, rowIndex, columnIndex}) {
-        if (rowIndex === 0) {
-          return 'background-color: lightseagreen;color: #fff;font-weight: 500;'
-        }
-      },
-      drawLine () {
-        // 基于准备好的dom，初始化echarts实例
-        this.myChart = this.$echarts.init(document.getElementById('echart1'))
-         this.myChart1 = this.$echarts.init(document.getElementById('echart2'))
-        // 绘制图表
-        this.myChart.setOption({
-
-          title: {
-            text: '近期考试数据'
-          },
-          tooltip: {
-            trigger: 'axis',
-            formatter: '{b0}<br/>{a0}: {c0}%<br />{a1}: {c1}%<br />'
-          },
-          color: ['RGB(90,177,239)', 'RGB(46,199,201)'],
-          legend: {
-            data: ['及格率', '参与率']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            // boundaryGap: false,
-            data: this.nameList
-          },
-          yAxis: {
-            type: 'value',
-            axisLabel: {
-              show: true,
-              interval: 'auto',
-              formatter: '{value}%'
-            },
-            show: true
-          },
-          series: [
-            {
-              name: '及格率',
-              type: 'line',
-              data: this.nearDatalistJ,
-              smooth: true,
-              itemStyle: {
-                normal: {
-                  lineStyle: {
-                    width: 3
-                  }
-                }
-              }
-            },
-            {
-              name: '参与率',
-              type: 'line',
-              data: this.nearDatalistC,
-              smooth: true,
-              itemStyle: {
-                normal: {
-                  lineStyle: {
-                    width: 3
-                  }
-                }
-              }
-            }
-          ]
-        })
-        this.myChart1.setOption({
-            title: {
-              text: '历史考核数据'
-            },
-            tooltip: {
-              trigger: 'axis',
-              formatter: '{b0}<br/>{a0}: {c0}%<br />{a1}: {c1}%<br />'
-            },
-          color: ['RGB(90,177,239)', 'RGB(46,199,201)'],
-            legend: {
-              data: ['及格率', '参与率']
-            },
-            grid: {
-              left: '3%',
-              right: '4%',
-              bottom: '3%',
-              containLabel: true
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
-            xAxis: {
-              type: 'category',
-              // boundaryGap: false,
-              data: this.dateListTime
-            },
-            yAxis: {
-              type: 'value',
-              axisLabel: {
-                show: true,
-                interval: 'auto',
-                formatter: '{value}%'
-              },
-              show: true
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.hisDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.hisDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-      })
-      },
-      // 获取数据列表
-      getDataList (type) {
-        if (type == '1') {
-          this.pageIndex = 1
-            this.pageSize = 5
-            this.totalPage = 0
-        }
-        this.nameList = []
-        this.nearDatalistC = []
-        this.nearDatalistJ = []
-        this.dataListLoading = true
+      menuCard () {
         this.$http({
-          url: this.$http.adornUrl('/ansower/examDataByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
-        }).then(({data}) => {
-          console.log('===============')
-          console.log(data)
-          if (data && data.code === 0) {
-            for (var i = 0; i < data.list.length; i++) {
-              if(this.dataForm.jobNo == '451692'){
-              if (data.list[i].name == 'PVD厂') {
-                this.dataForm.xxsAll = data.list[i].total
-                this.dataForm.xxsJion = data.list[i].examCount
-                this.dataForm.xxsJg = data.list[i].qualified
-                  this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '郭祥伟') {
-                this.dataForm.gxwAll = data.list[i].total
-                this.dataForm.gxwJion = data.list[i].examCount
-                this.dataForm.gxwJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '王启军') {
-                this.dataForm.wqjAll = data.list[i].total
-                this.dataForm.wqjJion = data.list[i].examCount
-                this.dataForm.wqjJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '岳平') {
-                this.dataForm.ypAll = data.list[i].total
-                this.dataForm.ypJion = data.list[i].examCount
-                this.dataForm.ypJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '邓海军') {
-                this.dataForm.dhjAll = data.list[i].total
-                this.dataForm.dhjJion = data.list[i].examCount
-                this.dataForm.dhjJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              if (data.list[i].name == '周颖') {
-                this.dataForm.zyAll = data.list[i].total
-                this.dataForm.zyJion = data.list[i].examCount
-                this.dataForm.zyJg = data.list[i].qualified
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-              } else {
-                this.nameList.push(data.list[i].name)
-                this.nearDatalistC.push(data.list[i].examRate)
-                this.nearDatalistJ.push(data.list[i].qualifRate)
-              }
-            }
-            console.log('sj====' + this.nearDatalistC)
-          let options = {
-            xAxis: {
-              data: this.nameList
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.nearDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.nearDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-          }
-          this.myChart.setOption(options)
-          } else {
-            // this.dataList = []
-            // this.totalPage = 0
-          }
-          this.dataListLoading = false
-        })
-        this.$http({
-          url: this.$http.adornUrl('/unexam/searchListByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo,
-            'page': this.pageIndex,
-            'rows': this.pageSize
-          })
-        }).then(({data}) => {
-          console.log(data)
-          if (data && data.code === 0) {
-            this.dataList = data.data.list
-          this.totalPage = data.data.total
-        } else {
-        }
-      })
-        this.$http({
-          url: this.$http.adornUrl('/ansower/hisDataByDirector'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
-        }).then(({data}) => {
-          console.log(data)
-        if (data && data.code === 0) {
-          this.dateListTime = data.data.time
-          this.hisDatalistC = data.data.examRate
-          this.hisDatalistJ = data.data.qualifRate
-          let options1 = {
-            xAxis: {
-              data: this.dateListTime
-            },
-            series: [
-              {
-                name: '及格率',
-                type: 'line',
-                data: this.hisDatalistJ,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              },
-              {
-                name: '参与率',
-                type: 'line',
-                data: this.hisDatalistC,
-                smooth: true,
-                itemStyle: {
-                  normal: {
-                    lineStyle: {
-                      width: 3
-                    }
-                  }
-                }
-              }
-            ]
-          }
-          this.myChart1.setOption(options1)
-        } else {
-        }
-      })
-      },
-      // 每页数
-      sizeChangeHandle (val) {
-        this.pageSize = val
-        this.pageIndex = 1
-        this.getDataList()
-      },
-      // 当前页
-      currentChangeHandle (val) {
-        this.pageIndex = val
-        this.getDataList()
-      },
-      // 多选
-      selectionChangeHandle (val) {
-        this.dataListSelections = val
-      },
-      // 新增 / 修改
-      addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
-        this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(id)
-        })
-      },
-      // 导出未考试人员
-      export2Exce () {
-        // 获取离职数据
-        this.$http({
-          url: this.$http.adornUrl('/unexam/exportExcel'),
-          method: 'post',
-          params: this.$http.adornParams({
-            'jobNo': this.dataForm.jobNo
-          })
+          url: this.$http.adornUrl('/sys/menu/nav'),
+          method: 'get',
+          params: this.$http.adornParams()
         }).then(({data}) => {
           if (data && data.code === 0) {
-          this.exportList = []
-            this.exportList = data.list
-          require.ensure([], () => {
-            const { export_json_to_excel } = require('../../vendor/Export2Excel')
-            const tHeader = ['工号', '姓名', '试卷名', '试卷类型', '状态', '部门', '职称', '主管']
-            // 上面设置Excel的表格第一行的标题
-            const filterVal = ['jobNo', 'name', 'title', 'ptype', 'status', 'department', 'position', 'director']
-            const list = this.exportList
-            const data = this.formatJson(filterVal, list)
-            export_json_to_excel(tHeader, data, '未考试人员名单表')
-        })
+          for(var item in data.menuList){
+            data.menuList[item].sicon = 'icon-svg__'+data.menuList[item].icon
+            data.menuList[item].icon = '#icon-'+data.menuList[item].icon
+          }
+          this.menuList = data.menuList
         }
+      }).catch((e) => {
+          console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+          router.push({ name: 'login' })
       })
       },
-      formatJson (filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => v[j]))
+      openMenu (id , menu) {
+        this.menuRout.set(id, true)
+        this.reload()
+        // console.log(menu.url)
+         this.$router.push({ name: menu.url.replace('/', '-') })
+      },
+      playClick () {
+        this.isPlay = !this.isPlay;
+        this.playStatus = 'paused';
+      },
+      closeSoundClick () {
+        this.isMute = !this.isMute;
+        if(this.isMute){
+          this.muteStatus = '';
+        }else{
+          this.muteStatus = 'muted';
+        }
       }
     }
   }
@@ -520,13 +133,53 @@
     /*height: 85vh;*/
     /*width: 100vw;*/
   }
-  .image{
-    width:100%;
-    height: 100%;
+  .boxItme .icon-svg{
+    font-size:38px;
+  }
+  .boxItme{
+    width:100px!important;
+    height:100px!important;
+    text-align: center;
+    display: inline-block;
+    margin: 30px 2px;
+  }
+  .boxCard {
+    width:100px!important;
+    height:100px!important;
+    font-size: 9px!important;
+  }
+  .boxItme .site-sidebar__menu-icon{
+    margin-right: 0px;
+  }
+  .view{
+    height:100%;
+    background: #2222;
+  }
+  .head-div{
+    height:70%;
+  }
+  .el-carousel__container{
+    height:100%;
+  }
+  .buttom-div{
+    margin-top:1%;
   }
   .imageBox{
     width:100%;
-    height: 100%;
+    height: 503px;
+    margin-top: 5%;
+  }
+  .videoBox{
+    width:100%;
+    height: 550px;
+    margin-top: 5%;
+  }
+  .flowBox{
+    background: white;
+    height: 160px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    border-style:double ;
   }
   .cardEl {
     transition: all .5s;

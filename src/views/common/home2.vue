@@ -612,7 +612,6 @@
     background: #FFFFFF;
   }
   .el-row {
-    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
   }

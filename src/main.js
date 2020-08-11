@@ -17,6 +17,14 @@ import { Loading } from 'element-ui'
 // import VueAxios from 'vue-axios'
 //
 // Vue.use(VueAxios, axios)
+
+
+import VideoPlayer from 'vue-video-player'
+import 'vue-video-player/src/custom-theme.css'
+import 'video.js/dist/video-js.css'
+Vue.use(VideoPlayer)
+
+
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 Vue.use(VueCookie)
@@ -47,6 +55,9 @@ Vue.prototype.endLoading = function () {
 
 // 保存整站vuex本地储存初始状态
 window.SITE_CONFIG['storeState'] = cloneDeep(store.state)
+
+//菜单控制全局变量
+Vue.prototype.menuRout = new Map()
 
 /* eslint-disable no-new */
 new Vue({

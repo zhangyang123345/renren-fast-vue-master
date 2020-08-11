@@ -34,6 +34,12 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item>
+        <el-select  v-model="dataForm.active" placeholder="人员状态" clearable>
+          <el-option v-for="(item,index) in actives" :key="index" :label="item.value" :value="item.id" >
+          </el-option>
+        </el-select>
+      </el-form-item>
       <!--<el-form-item>-->
         <!--<el-select  v-model="dataForm.supervisor" placeholder="主管" clearable>-->
           <!--<el-option v-for="(item,index) in supervisors" :key="index" :label="item.value" :value="item.id" >-->
@@ -108,10 +114,10 @@
         label="邮箱">
       </el-table-column>
       <el-table-column
-        prop="phone"
+        prop="costCategory"
         header-align="center"
         align="center"
-        label="联系方式">
+        label="成本别">
       </el-table-column>
       <el-table-column
         prop="department"
@@ -185,25 +191,25 @@
         prop="pja_1"
         header-align="center"
         align="center"
-        label="DMAIC/A3/DMADV/8D">
+        label="A3/DMA*">
       </el-table-column>
       <el-table-column
         prop="pja_2"
         header-align="center"
         align="center"
-        label="DMAIC/A3/DMADV/8D">
+        label="A3/DMA*">
       </el-table-column>
       <el-table-column
         prop="pja_3"
         header-align="center"
         align="center"
-        label="DMAIC/A3/DMADV/8D">
+        label="A3/DMA*">
       </el-table-column>
       <el-table-column
         prop="pja_4"
         header-align="center"
         align="center"
-        label="DMAIC/A3/DMADV/8D">
+        label="A3/DMA*">
       </el-table-column>
       <!--<el-table-column-->
       <!---->
@@ -255,7 +261,8 @@
         },
         exportList: [],
         supervisors: [],
-         valids: [{value: '1', name: '通过'}, {value: '0', name: '未通过'}],
+        valids: [{value: '1', name: '通过'}, {value: '0', name: '未通过'}],
+        actives: [{id: 0, value: '离职'}, {id: 1, value: '在职'},{id: 3, value: '异常'}],
         costCategorys: [{id: 0, value: 'IL'}, {id: 1, value: 'DL'}],
         levels: [],
         lineTypes: [],
@@ -331,7 +338,8 @@
             'director': this.dataForm.director + '',
             'lineType': this.dataForm.lineType + '',
             'keytime': this.dataForm.keyTime + '',
-            'valid': this.dataForm.valid + ''
+            'valid': this.dataForm.valid + '',
+            'active': this.dataForm.active
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -367,9 +375,9 @@
           this.exportList = data.list
           require.ensure([], () => {
             const { export_json_to_excel } = require('@/vendor/Export2Excel')
-            const tHeader = ['工号', '姓名', '邮箱', '联系方式', '部门', '职称', '线别', '主管', '证书编号', '是否有效', '认证日期', '有效日期', '铜级考核', 'Blitz','DMAIC/A3/DMADV/8','DMAIC/A3/DMADV/8','DMAIC/A3/DMADV/8','DMAIC/A3/DMADV/8']
+            const tHeader = ['工号', '姓名', '邮箱', '成本别', '部门', '职称', '线别', '主管', '证书编号', '是否有效', '认证日期', '有效日期', '铜级考核', 'Blitz','A3/DMA*','A3/DMA*','A3/DMA*','A3/DMA*']
             // 上面设置Excel的表格第一行的标题
-            const filterVal = ['jobNo', 'name', 'email', 'phone', 'department', 'position', 'lineType', 'director', 'certificationNo' , 'valid','certificationDate','expireOn','passExam','blitz','pja_1','pja_2','pja_3','pja_4']
+            const filterVal = ['jobNo', 'name', 'email', 'costCategory', 'department', 'position', 'lineType', 'director', 'certificationNo' , 'valid','certificationDate','expireOn','passExam','blitz','pja_1','pja_2','pja_3','pja_4']
             const list = this.exportList
             const data = this.formatJson(filterVal, list)
             export_json_to_excel(tHeader, data, '人员铜级信息列表')
@@ -464,3 +472,8 @@
     }
   }
 </script>
+<style>
+  .el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color: rgb(232, 247, 246) !important;
+  }
+</style>
