@@ -1,3 +1,4 @@
+
 <template>
   <div class="view">
     <el-row :gutter="24" class="el-row head-div" type="flex">
@@ -109,6 +110,7 @@
       openMenu (id , menu) {
         this.menuRout.set(id, true)
         this.reload()
+        this.$store.commit('common/updateSidebarFold', false)
         // console.log(menu.url)
          this.$router.push({ name: menu.url.replace('/', '-') })
       },
@@ -127,12 +129,7 @@
     }
   }
 </script>
-<style>
-  #login {
-    /*background-color: rgba(239,241,244,1);*/
-    /*height: 85vh;*/
-    /*width: 100vw;*/
-  }
+<style >
   .boxItme .icon-svg{
     font-size:38px;
   }
@@ -151,9 +148,12 @@
   .boxItme .site-sidebar__menu-icon{
     margin-right: 0px;
   }
+  .boxItme .el-card__body{
+    background:#ffffff;
+  }
   .view{
     height:100%;
-    background: #2222;
+    background: #ededed;
   }
   .head-div{
     height:70%;
@@ -166,13 +166,13 @@
   }
   .imageBox{
     width:100%;
-    height: 503px;
-    margin-top: 5%;
+    height: 61vh;
+    margin-top: 7%;
   }
   .videoBox{
     width:100%;
-    height: 550px;
-    margin-top: 5%;
+    height: 61vh;
+    margin-top: 7%;
   }
   .flowBox{
     background: white;

@@ -124,7 +124,6 @@
             data: this.$http.adornData()
           }).then(({data}) => {
             if (data && data.code === 0) {
-              this.menuRout.splice(0,this.menuRout.size())
               clearLoginInfo()
               this.$router.push({ name: 'login' })
             }
